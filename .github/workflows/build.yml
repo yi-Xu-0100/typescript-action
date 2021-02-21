@@ -35,5 +35,5 @@ jobs:
           name: actions ${{ matrix.node }}
           fail_ci_if_error: true
 
-      - name: Run lint-check
-        run: npm run lint-check
+      - name: Run format-check
+        run: npm run format-check
