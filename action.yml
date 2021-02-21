@@ -1,0 +1,24 @@
+name: typescript action
+author: yi_Xu
+description: >
+  Example GitHub action build in typescript.
+
+branding:
+  icon: award
+  color: green
+
+inputs:
+  booleanInput:
+    description: >
+      Set up a booleanInput.
+    required: false
+    default: true
+
+outputs:
+  booleanOutput:
+    description: >
+      Set the booleanInput as output.
+
+runs:
+  using: node12
+  main: dist/index.js
