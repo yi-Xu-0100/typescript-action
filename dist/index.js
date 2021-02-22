@@ -50,10 +50,12 @@ function getBooleanInput(booleanInputName, options) {
     var trueValue = ['true', 'True', 'TRUE', 'yes', 'Yes', 'YES', 'y', 'Y', 'on', 'On', 'ON'];
     var falseValue = ['false', 'False', 'FALSE', 'no', 'No', 'NO', 'n', 'N', 'off', 'Off', 'OFF'];
     var stringInput = core.getInput(booleanInputName, options);
+    core.debug('[DEBUG]: stringInput: ' + stringInput);
     if (trueValue.indexOf(stringInput) > -1)
         return true;
     if (falseValue.indexOf(stringInput) > -1)
         return false;
+    core.warning('Boolean Language-Independent Type for YAML™ Version 1.1: https://yaml.org/type/bool.html');
     throw TypeError("Wrong boolean input value of " + booleanInputName);
 }
 exports.getBooleanInput = getBooleanInput;
@@ -61,8 +63,10 @@ function run() {
     return __awaiter(this, void 0, void 0, function () {
         var booleanInput;
         return __generator(this, function (_a) {
+            core.info('[INFO]: Usage - https://github.com/yi-Xu-0100/typescript-action#readme');
             booleanInput = getBooleanInput('booleanInput');
             core.setOutput('booleanOutput', booleanInput);
+            core.info('[INFO]: Action successfully completed!');
             return [2 /*return*/];
         });
     });
@@ -70,7 +74,6 @@ function run() {
 exports.run = run;
 /* istanbul ignore next */
 if (require.main === require.cache[eval('__filename')]) {
-    core.info('[INFO]: Usage https://github.com/yi-Xu-0100/typescript-action#readme');
     run().catch(function (err) {
         core.setFailed("Action failed: " + err.message);
     });

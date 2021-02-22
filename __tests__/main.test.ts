@@ -17,6 +17,9 @@ const defaultOutputs = {
 
 let inputs: any;
 let outputs: any;
+let infoMessages: string[];
+let debugMessages: string[];
+let warningMessages: string[];
 let errorMessages: string[];
 
 describe('main', () => {
@@ -36,6 +39,15 @@ describe('main', () => {
     jest.spyOn(core, 'setOutput').mockImplementation((name: string, value: any) => {
       outputs[name] = value;
     });
+    jest.spyOn(core, 'info').mockImplementation((message: string): void => {
+      infoMessages.push(message);
+    });
+    jest.spyOn(core, 'debug').mockImplementation((message: string): void => {
+      debugMessages.push(message);
+    });
+    jest.spyOn(core, 'warning').mockImplementation((message: string | Error): void => {
+      warningMessages.push(message instanceof Error ? message.toString() : message);
+    });
     jest.spyOn(core, 'setFailed').mockImplementation((message: string | Error): void => {
       errorMessages.push(message instanceof Error ? message.toString() : message);
     });
@@ -43,6 +55,9 @@ describe('main', () => {
   beforeEach(() => {
     inputs = {};
     outputs = {};
+    infoMessages = [];
+    debugMessages = [];
+    warningMessages = [];
     errorMessages = [];
     for (let key in defaultOutputs) {
       outputs[key] = defaultOutputs[key as keyof typeof defaultOutputs];
@@ -81,6 +96,13 @@ describe('main', () => {
     inputs['booleanInput'] = 'wrongInput';
     await expect(main.run()).rejects.toEqual(
       TypeError('Wrong boolean input value of booleanInput')
+    );
+    expect(infoMessages[0]).toEqual(
+      '[INFO]: Usage - https://github.com/yi-Xu-0100/typescript-action#readme'
+    );
+    expect(debugMessages[0]).toEqual('[DEBUG]: stringInput: wrongInput');
+    expect(warningMessages[0]).toEqual(
+      'Boolean Language-Independent Type for YAML™ Version 1.1: https://yaml.org/type/bool.html'
     );
   });
 });

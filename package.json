@@ -17,8 +17,8 @@
     "format": "prettier --write \"**/*.{ts,md,json,yml,yaml}\"",
     "package": "ncc build --source-map --license licenses.txt",
     "lint-check": "tslint -p tsconfig.json && prettier --check \"**/*.{ts,md,json,yml,yaml}\"",
-    "all": "npm run build && npm run package && npm run format && npm run package && npm run test",
-    "all:coverage": "npm run build && npm run package && npm run format && npm run package && npm run coverage"
+    "all": "npm run format && npm run test && npm run build && npm run package",
+    "all:coverage": "npm run format && npm run coverage && npm run build && npm run package"
   },
   "lint-staged": {
     "**/*.{ts}": [
