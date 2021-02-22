@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check release
-        uses: GoogleCloudPlatform/release-please-action@v2.19.1
+        uses: GoogleCloudPlatform/release-please-action@v2.19.2
         id: release
         with:
           release-type: node
