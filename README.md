@@ -5,7 +5,7 @@
 [![sync2gitee(list)](<https://github.com/yi-Xu-0100/hub-mirror/workflows/sync2gitee(list)/badge.svg>)](https://github.com/yi-Xu-0100/hub-mirror)
 [![Build](https://github.com/yi-Xu-0100/typescript-action/workflows/build/badge.svg)](https://github.com/yi-Xu-0100/typescript-action/actions?query=workflow%3Abuild)
 [![Release](https://github.com/yi-Xu-0100/typescript-action/workflows/release/badge.svg)](https://github.com/yi-Xu-0100/typescript-action/actions?query=workflow%3Arelease)
-[![code coverage](https://img.shields.io/codecov/c/github/yi-Xu-0100/typescript-action)](https://app.codecov.io/gh/yi-Xu-0100/typescript-action)
+[![code coverage](https://codecov.io/gh/yi-Xu-0100/typescript-action/branch/main/graph/badge.svg)](https://app.codecov.io/gh/yi-Xu-0100/typescript-action)
 
 [![Github last commit](https://img.shields.io/github/last-commit/yi-Xu-0100/typescript-action)](https://github.com/yi-Xu-0100/typescript-action)
 [![Github latest release](https://img.shields.io/github/v/release/yi-Xu-0100/typescript-action)](https://github.com/yi-Xu-0100/typescript-action/releases)
