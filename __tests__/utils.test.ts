@@ -1,4 +1,4 @@
-import { run } from '../src/main';
+import { getBooleanInput } from '../src/utils';
 import * as core from '@actions/core';
 
 const defaultEnvVars = {
@@ -22,7 +22,7 @@ let debugMessages: string[];
 let warningMessages: string[];
 let errorMessages: string[];
 
-describe('main', () => {
+describe('utils', () => {
   beforeAll(() => {
     for (let key in defaultEnvVars) {
       process.env[key] = defaultEnvVars[key as keyof typeof defaultEnvVars];
@@ -69,13 +69,26 @@ describe('main', () => {
     jest.restoreAllMocks();
   });
 
-  it('Check the notification of the beginning and the end of action', async () => {
-    inputs['booleanInput'] = 'true';
-    await run();
-    expect(outputs['booleanOutput']).toEqual(true);
-    expect(infoMessages[0]).toEqual(
-      '[INFO]: Usage - https://github.com/yi-Xu-0100/typescript-action#readme'
+  it.each([
+    ['booleanInput', 'true', true],
+    ['booleanInput', 'True', true],
+    ['booleanInput', 'TRUE', true],
+    ['booleanInput', 'false', false],
+    ['booleanInput', 'False', false],
+    ['booleanInput', 'FALSE', false]
+  ])('Return %s with the input of %s', (inputName, inputValue, expected) => {
+    inputs[inputName] = inputValue;
+    expect(getBooleanInput(inputName)).toEqual(expected);
+  });
+
+  it('Throw warning and TypeError when input in wrong format', async () => {
+    inputs['booleanInput'] = 'wrongInput';
+    expect(() => {
+      getBooleanInput('booleanInput');
+    }).toThrow(TypeError('Input does not meet YAML 1.2 "Core Schema" specification: booleanInput'));
+    expect(debugMessages[0]).toEqual('[getBooleanInput.stringInput]: wrongInput');
+    expect(warningMessages[0]).toEqual(
+      'YAML 1.2 "Core Schema" specification: https://yaml.org/spec/1.2/spec.html#id2804923'
     );
-    expect(infoMessages[infoMessages.length - 1]).toEqual('[INFO]: Action successfully completed!');
   });
 });

@@ -2,8 +2,6 @@ name: build
 
 on:
   push:
-    branches:
-      - main
     paths:
       - '**.ts'
   pull_request:
@@ -32,6 +30,12 @@ jobs:
 
       - name: Run test and generate coverage
         run: npm run coverage
+
+      - name: Upload coverage as artifact
+        uses: actions/upload-artifact@v2.2.2
+        with:
+          name: coverage-${{ matrix.node }}
+          path: coverage
 
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v1.2.1

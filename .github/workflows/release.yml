@@ -14,3 +14,16 @@ jobs:
           release-type: node
           package-name: conventional-commit-types-i18n
           bump-minor-pre-major: true
+      - name: Update major and patch tags
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          majorVersion: v${{ steps.release.outputs.major }}
+          minorVersion: v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git tag -fa ${{ env.majorVersion }} -m "Update ${{ env.majorVersion }} tag"
+          git push origin ${{ env.majorVersion }} --force
+          git tag -fa ${{ env.minorVersion }} -m "Update ${{ env.minorVersion }} tag"
+          git push origin ${{ env.minorVersion }} --force
