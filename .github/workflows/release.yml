@@ -4,16 +4,19 @@ on:
   push:
     branches:
       - main
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
       - name: Check release
-        uses: GoogleCloudPlatform/release-please-action@v2.20.1
+        uses: GoogleCloudPlatform/release-please-action@v2.21.0
         with:
           release-type: node
-          package-name: conventional-commit-types-i18n
+          package-name: typescript-action
           bump-minor-pre-major: true
+          pull-request-title-pattern: 'chore${scope}: 🔖 release${component} v${version}'
+
       - name: Update major and patch tags
         if: ${{ steps.release.outputs.release_created }}
         env:
