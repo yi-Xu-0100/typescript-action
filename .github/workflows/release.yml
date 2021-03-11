@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check release
-        uses: GoogleCloudPlatform/release-please-action@v2.21.0
+        uses: GoogleCloudPlatform/release-please-action@v2.22
         with:
           release-type: node
           package-name: typescript-action
