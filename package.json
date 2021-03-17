@@ -1,6 +1,6 @@
 {
   "name": "@yi-xu-0100/typescript-action",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Example GitHub action build in typescript.",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
