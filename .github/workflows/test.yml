@@ -2,14 +2,55 @@ name: test
 
 on:
   push:
-    branches:
-      - main
     paths:
       - '**.js'
+      - '**/build.yml'
+      - 'package.json'
+  pull_request:
+    paths:
+      - '**.js'
+      - '**/build.yml'
+      - 'package.json'
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [10, 12, 14, 15]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2.3.4
+
+      - name: Setup node
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup package
+        run: |
+          node --version
+          npm install
+
+      - name: Run test and generate coverage
+        run: npm run coverage
+
+      - name: Upload coverage as artifact
+        uses: actions/upload-artifact@v2.2.2
+        with:
+          name: coverage-${{ matrix.node }}
+          path: coverage
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v1.3.1
+        with:
+          name: actions ${{ matrix.node }}
+          fail_ci_if_error: true
+
+      - name: Run lint-check
+        run: npm run lint-check
+
   run:
-    name: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
