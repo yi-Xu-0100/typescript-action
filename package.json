@@ -50,7 +50,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.1",
-    "@vercel/ncc": "^0.31.0",
+    "@vercel/ncc": "^0.31.1",
     "copyfiles": "^2.4.1",
     "husky": "^7.0.2",
     "jest": "^26.6.3",
