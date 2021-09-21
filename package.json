@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/yi-Xu-0100/typescript-action#readme",
   "devDependencies": {
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^27.0.2",
     "@types/node": "^16.9.4",
     "@vercel/ncc": "^0.31.1",
     "copyfiles": "^2.4.1",
